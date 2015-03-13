@@ -1,0 +1,11 @@
+rvm gemset create beakerlibvirttesting
+rvm gemset use beakerlibvirttesting
+
+
+
+gem install beaker-rspec
+BEAKER_set=libvirt rspec spec/acceptance
+
+virsh dumpxml ubuntu-server-12042-x64 | egrep '[0-9a-f][0-9a-f]:[0-9a-f][0-9a-f]' | cut -d "'" -f 2
+arp | grep 52:54:00:93:76:10 | cut -d " " -f 1
+virsh destroy ubuntu-server-12042-x64; virsh undefine ubuntu-server-12042-x64
